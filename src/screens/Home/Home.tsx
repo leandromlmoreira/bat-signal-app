@@ -1,54 +1,53 @@
-import React, { useState } from 'react';
-import { Pressable, Text, View, useWindowDimensions } from 'react-native';
+import { useCallback } from 'react';
+import { StyleSheet, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
+import * as Haptics from 'expo-haptics';
 
-import { BatSignal } from '../../components/BatSignal/BatSignal';
-import { styles } from './styles';
+import { GothamScene } from '../../components/scene/GothamScene';
+import { useReducedMotion } from '../../hooks/useReducedMotion';
+import { useSceneLayout } from '../../hooks/useSceneLayout';
+import { useSignal } from '../../hooks/useSignal';
+import { useSignalPower } from '../../hooks/useSignalPower';
+import { useAppFonts } from '../../theme/fonts';
+import { colors, isWeb } from '../../theme/tokens';
+import { CompactDeck } from './CompactDeck';
+import { WideDeck } from './WideDeck';
+
+function feelSwitch(turningOn: boolean) {
+  if (isWeb) return;
+  const style = turningOn ? Haptics.ImpactFeedbackStyle.Heavy : Haptics.ImpactFeedbackStyle.Light;
+  Haptics.impactAsync(style).catch(() => undefined);
+}
 
 export default function Home() {
-  const [active, setActive] = useState(false);
-  const [activationCount, setActivationCount] = useState(0);
-  const { width } = useWindowDimensions();
+  const layout = useSceneLayout();
+  const signal = useSignal();
+  const reducedMotion = useReducedMotion();
+  const fontsReady = useAppFonts();
+  const power = useSignalPower(signal.active, reducedMotion);
+  const animated = !reducedMotion;
+  const { active, toggle } = signal;
 
-  const signalSize = Math.min(320, Math.max(180, width * 0.6));
+  const handleToggle = useCallback(() => {
+    feelSwitch(!active);
+    toggle();
+  }, [active, toggle]);
 
-  function handleToggle() {
-    setActive((current) => {
-      const next = !current;
-      if (next) setActivationCount((count) => count + 1);
-      return next;
-    });
-  }
+  const Deck = layout.wide ? WideDeck : CompactDeck;
 
   return (
-    <View style={styles.container}>
+    <View style={styles.root}>
       <StatusBar style="light" />
-
-      <Text style={styles.title}>GOTHAM CITY</Text>
-      <Text style={styles.subtitle}>
-        {active ? 'O sinal foi lançado no céu.' : 'O céu está calmo... por enquanto.'}
-      </Text>
-
-      <View style={styles.signalArea}>
-        <BatSignal active={active} size={signalSize} />
-      </View>
-
-      <Pressable
-        onPress={handleToggle}
-        style={({ pressed }) => [
-          styles.button,
-          active ? styles.buttonActive : styles.buttonInactive,
-          pressed && styles.buttonPressed,
-        ]}
-      >
-        <Text style={[styles.buttonText, active && styles.buttonTextActive]}>
-          {active ? 'DESLIGAR SINAL' : 'ACIONAR SINAL'}
-        </Text>
-      </Pressable>
-
-      <Text style={styles.counter}>
-        Sinal acionado {activationCount} {activationCount === 1 ? 'vez' : 'vezes'} nesta sessão
-      </Text>
+      <GothamScene layout={layout} power={power} animated={animated} />
+      {fontsReady && <Deck layout={layout} signal={signal} onToggle={handleToggle} animated={animated} />}
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  root: {
+    flex: 1,
+    backgroundColor: colors.night,
+    overflow: 'hidden',
+  },
+});

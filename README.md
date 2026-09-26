@@ -1,56 +1,62 @@
-# 🦇 Bat-Sinal
+# Bat-Sinal
 
-Bat-Sinal é um app mobile que recria o clássico sinal de Gotham City: um toque projeta o facho amarelo com a silhueta do morcego no céu, pronto para chamar o vigilante quando a cidade precisa dele.
+Central de chamados do GCPD em React Native: um toque acende o holofote no telhado e projeta o morcego nas nuvens de Gotham, no celular e na web.
 
-**Demo online:** https://leandromlmoreira.github.io/bat-signal-app/
+**[Ver ao vivo →](https://leandromlmoreira.github.io/bat-sinal/)**
+
+![Bat-Sinal em ação: o holofote acende, o feixe sobe pela chuva e projeta o morcego nas nuvens](docs/preview.gif)
+
+<p>
+  <img src="docs/preview.png" alt="Versão desktop com o sinal ativo" width="68%" />
+  <img src="docs/preview-mobile.png" alt="Versão mobile com o sinal ativo" width="28%" />
+</p>
 
 ## Funcionalidades
 
-- **Acionar/desligar o sinal** com um botão, alternando entre os estados "sinal ativo" e "céu calmo".
-- **Animação de pulso** no facho enquanto ele está ativo, simulando o efeito de um projetor real.
-- **Contador de acionamentos**, mostrando quantas vezes o sinal foi chamado na sessão atual.
-- **Layout responsivo**: o tamanho do sinal se ajusta à largura da tela, de celulares a tablets.
-
-## Como usar
-
-1. Abra o app. A tela mostra "GOTHAM CITY" e a mensagem "O céu está calmo... por enquanto.".
-2. Toque em **ACIONAR SINAL**. O facho amarelo se ilumina, a silhueta do morcego aparece recortada no centro e o sinal passa a pulsar suavemente.
-3. O contador na parte inferior soma mais um acionamento.
-4. Toque em **DESLIGAR SINAL** para apagar o facho e voltar ao estado de repouso.
+- **Gotham à noite, desenhada em código.** Skyline em três camadas com parallax sutil (e reação ao mouse na web), janelas acesas que apagam e voltam, nuvens baixas em movimento, lua encoberta e chuva fina em duas profundidades.
+- **Ignição com estalo.** Ao acionar, o holofote dá um estalo de luz, o feixe volumétrico sobe gaguejando como um arco de carbono e só então o morcego aparece nas nuvens, com halo, tremulação leve e a chuva iluminada dentro do feixe.
+- **Símbolo próprio.** O morcego é um desenho vetorial original, anguloso, feito em SVG para este projeto.
+- **Terminal da polícia.** Painel no estilo terminal do GCPD com log de eventos e o status ao vivo: `Comissário Gordon: sinal ativo — 00:14`.
+- **Contador de chamados** com animação a cada acionamento e botão para desligar o sinal.
+- **Layouts de verdade para cada tela.** Composição vertical no celular, coluna editorial no desktop e modo compacto para celular deitado.
+- **Cuidados de produto.** Vibração ao acionar (iOS/Android), estados de hover e foco no teclado na web, respeito a "reduzir movimento" do sistema e animações rodando no driver nativo.
 
 ## Stack
 
-- [React Native](https://reactnative.dev/) + [Expo](https://docs.expo.dev/) (SDK 57)
-- TypeScript
-- [react-native-svg](https://github.com/software-mansion/react-native-svg) para o desenho vetorial do facho e da silhueta
-- API `Animated` do React Native para a animação de pulso
+- [Expo](https://docs.expo.dev/) SDK 57 + React Native 0.86, TypeScript
+- [react-native-svg](https://github.com/software-mansion/react-native-svg) para toda a cena (céu, prédios, nuvens, chuva, feixe e símbolo)
+- API `Animated` com `useNativeDriver` no celular (só `transform` e `opacity` são animados)
+- `expo-font` com Big Shoulders, Barlow Condensed e JetBrains Mono (Google Fonts)
+- `expo-haptics` e `react-native-safe-area-context`
+- Deploy da versão web no GitHub Pages via GitHub Actions
 
-## Como rodar localmente
+## Como rodar
 
 ```bash
-git clone https://github.com/leandromlmoreira/bat-signal-app.git
-cd bat-signal-app
+git clone https://github.com/leandromlmoreira/bat-sinal.git
+cd bat-sinal
 npm install
 npm start
 ```
 
-Abra no Expo Go escaneando o QR code exibido no terminal, ou rode diretamente em uma plataforma:
+Escaneie o QR code com o Expo Go ou abra direto numa plataforma:
 
 ```bash
-npm run web      # navegador
-npm run android  # emulador/dispositivo Android
-npm run ios      # simulador/dispositivo iOS
+npm run web       # navegador
+npm run android   # emulador ou dispositivo Android
+npm run ios       # simulador ou dispositivo iOS
 ```
 
-## Qualidade e CI
+## Qualidade e deploy
 
 ```bash
-npx tsc --noEmit   # checagem de tipos
-npm run lint       # eslint (eslint-config-expo)
+npm run typecheck   # tsc --noEmit
+npm run lint        # eslint-config-expo
+npm run build       # exporta a versão web estática para dist/
 ```
 
-A cada push na branch `main`, um workflow de GitHub Actions gera a versão web estática do app (`expo export -p web`) e publica automaticamente no GitHub Pages.
+A cada push na `main`, o workflow `deploy-pages.yml` checa tipos e lint, exporta a web com `baseUrl` `/bat-sinal` (definido no `app.json`) e publica no GitHub Pages.
 
 ---
 
-Base: desafio "Recrie um app de Bat-Sinal" da trilha de React Native da DIO.
+<sub>Nasceu do desafio "Recrie um app de Bat-Sinal" da trilha de React Native da DIO.</sub>

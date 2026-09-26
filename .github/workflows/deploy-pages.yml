@@ -22,18 +22,17 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
       - run: npm ci
 
       - run: npx tsc --noEmit
 
-      - run: npx expo export -p web
+      - run: npm run lint
 
-      - name: Ajustar caminho base para o subdiretório do GitHub Pages
-        run: |
-          sed -i 's|"/_expo/|"/bat-signal-app/_expo/|g; s|href="/favicon.ico"|href="/bat-signal-app/favicon.ico"|g' dist/index.html
+      - name: Exportar a versão web (baseUrl /bat-sinal definido no app.json)
+        run: npm run build
 
       - uses: actions/upload-pages-artifact@v3
         with:
