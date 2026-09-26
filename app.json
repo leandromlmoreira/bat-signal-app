@@ -1,17 +1,18 @@
 {
   "expo": {
-    "name": "bat-signal-app",
-    "slug": "bat-signal-app",
+    "name": "Bat-Sinal",
+    "slug": "bat-sinal",
     "version": "1.0.0",
-    "orientation": "portrait",
+    "orientation": "default",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#03050A",
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
+        "backgroundColor": "#03050A",
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
@@ -19,7 +20,17 @@
       "predictiveBackGestureEnabled": false
     },
     "web": {
-      "favicon": "./assets/favicon.png"
-    }
+      "favicon": "./assets/favicon.png",
+      "name": "Bat-Sinal · Central de chamados do GCPD",
+      "shortName": "Bat-Sinal",
+      "themeColor": "#03050A",
+      "backgroundColor": "#03050A"
+    },
+    "experiments": {
+      "baseUrl": "/bat-sinal"
+    },
+    "plugins": [
+      "expo-font"
+    ]
   }
 }
