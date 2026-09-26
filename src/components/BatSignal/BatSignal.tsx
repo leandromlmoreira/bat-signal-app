@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Animated, Easing, View } from 'react-native';
 import Svg, { Circle, Path } from 'react-native-svg';
 
@@ -11,12 +11,8 @@ interface BatSignalProps {
 
 const AnimatedSvg = Animated.createAnimatedComponent(Svg);
 
-/**
- * Desenho do sinal do Batman: um facho circular amarelo com o morcego
- * recortado no centro. Quando ativo, pulsa suavemente (efeito de projetor).
- */
 export function BatSignal({ active, size = 240 }: BatSignalProps) {
-  const pulse = useRef(new Animated.Value(1)).current;
+  const [pulse] = useState(() => new Animated.Value(1));
 
   useEffect(() => {
     if (!active) {
@@ -60,7 +56,6 @@ export function BatSignal({ active, size = 240 }: BatSignalProps) {
           fill={active ? '#F5C242' : '#3A3A3A'}
           opacity={active ? 0.95 : 0.4}
         />
-        {/* Silhueta do morcego (estilo clássico do Bat-Sinal), recortada sobre o facho */}
         <Path
           d="M100,78
              C93,64 76,62 62,70

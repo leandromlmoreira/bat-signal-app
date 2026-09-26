@@ -1,56 +1,56 @@
-# 🦇 Bat-Signal App
+# 🦇 Bat-Sinal
 
-App mobile em React Native (Expo) que recria o Bat-Sinal: acione e veja o sinal do Batman projetado no céu de Gotham, de forma interativa e responsiva.
+Bat-Sinal é um app mobile que recria o clássico sinal de Gotham City: um toque projeta o facho amarelo com a silhueta do morcego no céu, pronto para chamar o vigilante quando a cidade precisa dele.
 
-Projeto do desafio **"Recrie um app de Bat-Sinal"**, da Formação React Native Developer (DIO / Santander).
+**Demo online:** https://leandromlmoreira.github.io/bat-signal-app/
 
-## O que o projeto faz
+## Funcionalidades
 
-- Um botão **ACIONAR SINAL** liga o facho amarelo com a silhueta do morcego recortada no centro, como o Bat-Sinal original.
-- O sinal pulsa suavemente enquanto ativo (efeito de projetor), usando a API `Animated` do React Native.
-- Um contador mostra quantas vezes o sinal foi acionado na sessão atual.
-- O tamanho do sinal se adapta à largura da tela (`useWindowDimensions`), funcionando tanto em celulares pequenos quanto em tablets.
+- **Acionar/desligar o sinal** com um botão, alternando entre os estados "sinal ativo" e "céu calmo".
+- **Animação de pulso** no facho enquanto ele está ativo, simulando o efeito de um projetor real.
+- **Contador de acionamentos**, mostrando quantas vezes o sinal foi chamado na sessão atual.
+- **Layout responsivo**: o tamanho do sinal se ajusta à largura da tela, de celulares a tablets.
 
-## Tecnologias
+## Como usar
+
+1. Abra o app. A tela mostra "GOTHAM CITY" e a mensagem "O céu está calmo... por enquanto.".
+2. Toque em **ACIONAR SINAL**. O facho amarelo se ilumina, a silhueta do morcego aparece recortada no centro e o sinal passa a pulsar suavemente.
+3. O contador na parte inferior soma mais um acionamento.
+4. Toque em **DESLIGAR SINAL** para apagar o facho e voltar ao estado de repouso.
+
+## Stack
 
 - [React Native](https://reactnative.dev/) + [Expo](https://docs.expo.dev/) (SDK 57)
 - TypeScript
-- [react-native-svg](https://github.com/software-mansion/react-native-svg) — desenho vetorial do facho e da silhueta do morcego
-- `Animated` API (nativa do React Native) — animação de pulso
+- [react-native-svg](https://github.com/software-mansion/react-native-svg) para o desenho vetorial do facho e da silhueta
+- API `Animated` do React Native para a animação de pulso
 
-## Estrutura
-
-```
-src/
-├── components/
-│   └── BatSignal/       # o facho + silhueta do morcego, com animação de pulso
-└── screens/
-    └── Home/            # tela única: título, sinal, botão e contador
-```
-
-## Como executar
+## Como rodar localmente
 
 ```bash
 git clone https://github.com/leandromlmoreira/bat-signal-app.git
 cd bat-signal-app
 npm install
-npm run start
+npm start
 ```
 
-Abra no Expo Go escaneando o QR code, ou rode `npm run web` / `npm run android` / `npm run ios`.
+Abra no Expo Go escaneando o QR code exibido no terminal, ou rode diretamente em uma plataforma:
 
-## Decisões de design
+```bash
+npm run web      # navegador
+npm run android  # emulador/dispositivo Android
+npm run ios      # simulador/dispositivo iOS
+```
 
-- **Silhueta em SVG, não imagem**: desenhei o facho e o morcego com `react-native-svg` em vez de usar uma imagem estática, para o sinal escalar sem perder qualidade em qualquer tamanho de tela.
-- **Cor de acordo com o estado**: círculo e texto do botão trocam de cor (amarelo apagado/cinza quando inativo, amarelo vivo quando ativo) para que o estado do sinal seja óbvio mesmo sem ler o texto.
-- **Responsividade**: o tamanho do sinal é calculado como uma fração da largura da tela (`width * 0.6`, entre 180 e 320px), em vez de um valor fixo.
+## Qualidade e CI
 
-## O que aprendi
+```bash
+npx tsc --noEmit   # checagem de tipos
+npm run lint       # eslint (eslint-config-expo)
+```
 
-- Como desenhar formas vetoriais customizadas em React Native com `react-native-svg`, incluindo paths com curvas Bézier (`C`) para um contorno orgânico do morcego.
-- Como animar um valor de escala em loop com `Animated.loop` + `Animated.sequence`, e limpar a animação (`loop.stop()`) quando o componente desmonta ou o estado muda.
-- Que responsividade em React Native muitas vezes é só calcular valores a partir de `useWindowDimensions`, em vez de depender só de flexbox.
+A cada push na branch `main`, um workflow de GitHub Actions gera a versão web estática do app (`expo export -p web`) e publica automaticamente no GitHub Pages.
 
 ---
 
-Feito durante a Formação React Native Developer (DIO).
+Base: desafio "Recrie um app de Bat-Sinal" da trilha de React Native da DIO.

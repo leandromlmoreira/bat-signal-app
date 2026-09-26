@@ -10,8 +10,6 @@ export default function Home() {
   const [activationCount, setActivationCount] = useState(0);
   const { width } = useWindowDimensions();
 
-  // Responsivo: o sinal ocupa uma fração da largura da tela, com limites
-  // para não ficar minúsculo em telas pequenas nem gigante em tablets.
   const signalSize = Math.min(320, Math.max(180, width * 0.6));
 
   function handleToggle() {
