@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import Svg, { Circle, Defs, G, LinearGradient, Path, RadialGradient, Rect, Stop } from "react-native-svg";
-import { BAT_PATH } from "./Icons.tsx";
+import { BAT_BOX, BAT_PATH } from "./Icons.tsx";
 import { colors } from "../theme/tokens.ts";
 
 const WIDTH = 640;
@@ -63,7 +63,9 @@ function lampPath() {
 }
 
 export function SignalScene({ anchor = "center" }: { anchor?: "center" | "right" }) {
-  const batScale = (SIGNAL.r * 1.42) / 180;
+  const batScale = (SIGNAL.r * 1.56) / BAT_BOX.width;
+  const batX = SIGNAL.x - (BAT_BOX.x + BAT_BOX.width / 2) * batScale;
+  const batY = SIGNAL.y - (BAT_BOX.y + BAT_BOX.height / 2) * batScale;
   return (
     <Svg
       style={StyleSheet.absoluteFill}
@@ -99,7 +101,7 @@ export function SignalScene({ anchor = "center" }: { anchor?: "center" | "right"
       <Path d={beamPath()} fill="url(#beam)" />
       <Circle cx={SIGNAL.x} cy={SIGNAL.y} r={SIGNAL.r * 2.1} fill="url(#halo)" />
       <Circle cx={SIGNAL.x} cy={SIGNAL.y} r={SIGNAL.r} fill="url(#disc)" opacity={0.95} />
-      <G transform={`translate(${SIGNAL.x - 100 * batScale} ${SIGNAL.y - 55 * batScale}) scale(${batScale})`}>
+      <G transform={`translate(${batX} ${batY}) scale(${batScale})`}>
         <Path d={BAT_PATH} fill={colors.ink} opacity={0.92} />
       </G>
       {BUILDINGS.map((building, index) => (

@@ -7,7 +7,7 @@ export function BrandBar({ compact }: { compact: boolean }) {
     <View style={styles.bar}>
       <View style={styles.brand}>
         <View style={styles.mark}>
-          <BatGlyph size={26} color={colors.ink} />
+          <BatGlyph size={28} color={colors.ink} />
         </View>
         <Text style={styles.wordmark}>
           Bat<Text style={styles.wordmarkAccent}>Pass</Text>
