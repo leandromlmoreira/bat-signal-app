@@ -79,8 +79,8 @@ function ProjectionView({ layout, power, animated }: ProjectionProps) {
         {CLOUD_SHADES.map((shade) => (
           <Ellipse key={shade.cx} {...shade} fill="#5A3A14" />
         ))}
-        <G transform={`translate(${batX} ${batY}) scale(${BAT_SCALE})`}>
-          <Path d={BAT_SYMBOL.path} fill="#3A2408" opacity={0.35} stroke="#3A2408" strokeWidth={5} strokeLinejoin="round" />
+        <G transform={`translate(${batX} ${batY}) scale(${BAT_SCALE}) ${BAT_SYMBOL.transform}`}>
+          <Path d={BAT_SYMBOL.path} fill="#3A2408" opacity={0.35} stroke="#3A2408" strokeWidth={0.35} strokeLinejoin="round" />
           <Path d={BAT_SYMBOL.path} fill="#140C04" opacity={0.92} />
         </G>
       </Svg>

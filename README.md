@@ -15,7 +15,7 @@ Central de chamados do GCPD em React Native: um toque acende o holofote no telha
 
 - **Gotham à noite, desenhada em código.** Skyline em três camadas com parallax sutil (e reação ao mouse na web), janelas acesas que apagam e voltam, nuvens baixas em movimento, lua encoberta e chuva fina em duas profundidades.
 - **Ignição com estalo.** Ao acionar, o holofote dá um estalo de luz, o feixe volumétrico sobe gaguejando como um arco de carbono e só então o morcego aparece nas nuvens, com halo, tremulação leve e a chuva iluminada dentro do feixe.
-- **Símbolo próprio.** O morcego é um desenho vetorial original, anguloso, feito em SVG para este projeto.
+- **Símbolo clássico.** O morcego projetado segue o contorno clássico do Bat-Sinal, em vetor ([SVG Repo](https://www.svgrepo.com/svg/485626/batman)); Batman é marca da DC Comics e este é um projeto de fã sem fins comerciais.
 - **Terminal da polícia.** Painel no estilo terminal do GCPD com log de eventos e o status ao vivo: `Comissário Gordon: sinal ativo — 00:14`.
 - **Contador de chamados** com animação a cada acionamento e botão para desligar o sinal.
 - **Layouts de verdade para cada tela.** Composição vertical no celular, coluna editorial no desktop e modo compacto para celular deitado.
