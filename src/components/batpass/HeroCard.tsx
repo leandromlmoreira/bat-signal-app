@@ -6,6 +6,8 @@ import { BezelCard } from '../ui/BezelCard';
 import { Eyebrow } from '../ui/Eyebrow';
 import { HeroScene } from './HeroScene';
 
+const STACKED_FACTS_WIDTH = 600;
+
 const FACTS = [
   { value: 'Web Crypto', label: 'aleatoriedade criptográfica' },
   { value: '0 bytes', label: 'enviados para servidores' },
@@ -57,7 +59,7 @@ export function HeroCard({ compact }: { compact: boolean }) {
           histórico só com você.
         </Text>
       </View>
-      <Facts compact={compact} />
+      <Facts compact={compact || size.width < STACKED_FACTS_WIDTH} />
     </BezelCard>
   );
 }

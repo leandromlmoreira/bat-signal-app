@@ -58,7 +58,7 @@ export function BatPassScreen({ chrome }: { chrome: Chrome }) {
   );
 
   const historyCard = (
-    <BezelCard coreStyle={coreStyle}>
+    <BezelCard style={wide && styles.grow} coreStyle={coreStyle}>
       <HistoryPanel entries={history.entries} ready={history.ready} copiedKey={clipboard.copiedKey} onCopy={copyEntry} onClear={history.clear} />
     </BezelCard>
   );
@@ -77,10 +77,10 @@ export function BatPassScreen({ chrome }: { chrome: Chrome }) {
         {wide ? (
           <View style={styles.columns}>
             <View style={styles.leftColumn}>
-              <Reveal delay={60} duration={760} style={styles.grow}>
+              <Reveal delay={60} duration={760}>
                 <HeroCard compact={false} />
               </Reveal>
-              <Reveal delay={220} duration={760}>
+              <Reveal delay={220} duration={760} style={styles.grow}>
                 {historyCard}
               </Reveal>
             </View>
