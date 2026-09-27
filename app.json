@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "BatPass",
-    "slug": "react-native-bat-pass",
+    "slug": "bat-pass",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -31,7 +31,7 @@
     ],
     "backgroundColor": "#05060A",
     "experiments": {
-      "baseUrl": "/react-native-bat-pass"
+      "baseUrl": "/bat-pass"
     }
   }
 }

@@ -6,11 +6,15 @@ interface IconProps {
 }
 
 export const BAT_PATH =
-  "M100 84 Q104 74 110 72 Q118 70 124 78 Q132 66 140 70 Q150 72 154 64 Q164 58 172 66 Q184 50 186 26 Q170 42 150 44 Q128 44 130 30 Q122 40 110 42 L107 30 L104 40 L96 40 L93 30 L90 42 Q78 40 70 30 Q72 44 50 44 Q30 42 14 26 Q16 50 28 66 Q36 58 46 64 Q50 72 60 70 Q68 66 76 78 Q82 70 90 72 Q96 74 100 84 Z";
+  "M30.555 23.53c0 0.062 1.951-2.357 0.39-3.981-1.874-2.124-5.116 1.056-5.116 1.056-2.562-5.059-6.424 3.145-6.424 3.145s-3.348-7.731-6.221-3.047c0.062 0-2.383-2.793-4.819-1.481-1.749 1.749 0 4.091 0 4.091-9.119-3.186-9.712-12.492 2.952-16.286-3.576 4.481 6.59 10.649 5.84-0.344l2.155 1.89c0 0 2.171-1.796 2.171-1.921-0.25 10.993 9.369 4.544 6.121 0.484 11.429 3.308 13.381 11.21 2.951 16.394z";
+
+export const BAT_BOX = { x: 1.648, y: 6.652, width: 35.731, height: 17.098 };
+
+const BAT_VIEWBOX = `${BAT_BOX.x} ${BAT_BOX.y} ${BAT_BOX.width} ${BAT_BOX.height}`;
 
 export function BatGlyph({ size = 28, color }: IconProps) {
   return (
-    <Svg width={size} height={size / 2} viewBox="10 20 180 70">
+    <Svg width={size} height={(size * BAT_BOX.height) / BAT_BOX.width} viewBox={BAT_VIEWBOX}>
       <Path d={BAT_PATH} fill={color} />
     </Svg>
   );
