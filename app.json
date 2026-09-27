@@ -1,17 +1,17 @@
 {
   "expo": {
-    "name": "bat-pass-generator",
-    "slug": "bat-pass-generator",
+    "name": "BatPass",
+    "slug": "react-native-bat-pass",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "dark",
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
+        "backgroundColor": "#05060A",
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
@@ -19,7 +19,19 @@
       "predictiveBackGestureEnabled": false
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/favicon.png",
+      "name": "BatPass · gerador de senhas",
+      "shortName": "BatPass",
+      "description": "Gerador de senhas com entropia real, aleatoriedade criptográfica e histórico local.",
+      "themeColor": "#05060A",
+      "backgroundColor": "#05060A"
+    },
+    "plugins": [
+      "expo-font"
+    ],
+    "backgroundColor": "#05060A",
+    "experiments": {
+      "baseUrl": "/react-native-bat-pass"
     }
   }
 }
