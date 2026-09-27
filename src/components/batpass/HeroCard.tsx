@@ -2,14 +2,13 @@ import { useState } from 'react';
 import { StyleSheet, Text, View, type LayoutChangeEvent } from 'react-native';
 
 import { colors, fonts } from '../../theme/tokens';
-import { BezelCard } from '../ui/BezelCard';
-import { Eyebrow } from '../ui/Eyebrow';
+import { Panel } from '../ui/Panel';
 import { HeroScene } from './HeroScene';
 
 const STACKED_FACTS_WIDTH = 600;
 
 const FACTS = [
-  { value: 'Web Crypto', label: 'aleatoriedade criptográfica' },
+  { value: 'Web Crypto', label: 'sorteio criptográfico' },
   { value: '0 bytes', label: 'enviados para servidores' },
   { value: '8 a 64', label: 'caracteres por senha' },
 ];
@@ -31,7 +30,7 @@ function Facts({ compact }: { compact: boolean }) {
 
 function titleSizeFor(width: number, compact: boolean) {
   if (!width) return compact ? 52 : 84;
-  return compact ? Math.min(56, (width - 44) / 5.5) : Math.min(84, (width - 88) / 6.2);
+  return compact ? Math.min(64, (width - 44) / 5.2) : Math.min(90, (width - 88) / 7.2);
 }
 
 export function HeroCard({ compact }: { compact: boolean }) {
@@ -44,13 +43,12 @@ export function HeroCard({ compact }: { compact: boolean }) {
   };
 
   return (
-    <BezelCard style={styles.shell} coreStyle={[styles.core, compact && styles.coreCompact]}>
+    <Panel style={styles.shell} contentStyle={[styles.core, compact && styles.coreCompact]}>
       <View style={StyleSheet.absoluteFill} onLayout={handleLayout}>
         {size.width > 0 && <HeroScene width={size.width} height={size.height} compact={compact} />}
       </View>
       <View style={[styles.content, compact && styles.contentCompact]}>
-        <Eyebrow label={compact ? 'Área 02 · Senhas' : 'Área 02 · Cofre de senhas'} />
-        <Text accessibilityRole="header" style={[styles.title, { fontSize: titleSize, lineHeight: titleSize * 0.88 }]}>
+        <Text accessibilityRole="header" style={[styles.title, { fontSize: titleSize, lineHeight: titleSize * 0.98 }]}>
           Senhas que{'\n'}Gotham{'\n'}
           <Text style={styles.titleAccent}>não quebra.</Text>
         </Text>
@@ -60,7 +58,7 @@ export function HeroCard({ compact }: { compact: boolean }) {
         </Text>
       </View>
       <Facts compact={compact || size.width < STACKED_FACTS_WIDTH} />
-    </BezelCard>
+    </Panel>
   );
 }
 
@@ -89,7 +87,7 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: fonts.display,
     textTransform: 'uppercase',
-    letterSpacing: 0.5,
+    letterSpacing: 1,
     color: colors.text,
     includeFontPadding: false,
   },
@@ -97,38 +95,36 @@ const styles = StyleSheet.create({
     color: colors.amber,
   },
   lead: {
-    maxWidth: 440,
+    maxWidth: 420,
     fontFamily: fonts.body,
-    fontSize: 21,
+    fontSize: 19,
     lineHeight: 28,
     color: colors.muted,
   },
   leadCompact: {
-    fontSize: 18,
-    lineHeight: 24,
+    fontSize: 17,
+    lineHeight: 25,
   },
   facts: {
     flexDirection: 'row',
-    gap: 12,
-    marginTop: 36,
+    marginTop: 40,
+    borderTopWidth: 1,
+    borderTopColor: colors.hairline,
+    backgroundColor: 'rgba(6,9,14,0.7)',
   },
   fact: {
     flex: 1,
-    gap: 2,
-    paddingVertical: 14,
-    paddingHorizontal: 16,
-    borderRadius: 16,
-    backgroundColor: 'rgba(5,8,15,0.72)',
-    borderWidth: 1,
-    borderColor: colors.hairline,
+    gap: 4,
+    paddingVertical: 16,
+    paddingHorizontal: 18,
+    borderRightWidth: 1,
+    borderRightColor: colors.hairline,
   },
   factsCompact: {
-    marginTop: 24,
-    paddingHorizontal: 16,
-    borderRadius: 16,
-    backgroundColor: 'rgba(5,8,15,0.72)',
-    borderWidth: 1,
-    borderColor: colors.hairline,
+    marginTop: 26,
+    borderTopWidth: 1,
+    borderTopColor: colors.hairline,
+    backgroundColor: 'rgba(9,13,19,0.9)',
   },
   factCompact: {
     flexDirection: 'row',
@@ -142,22 +138,25 @@ const styles = StyleSheet.create({
     borderTopColor: colors.hairline,
   },
   factValue: {
-    fontFamily: fonts.display,
-    fontSize: 26,
-    letterSpacing: 0.5,
-    color: colors.amber,
+    fontFamily: fonts.heading,
+    fontSize: 22,
+    letterSpacing: 1.6,
+    textTransform: 'uppercase',
+    color: colors.text,
   },
   factValueCompact: {
     flexShrink: 0,
-    fontSize: 21,
+    fontSize: 18,
   },
   factLabelCompact: {
     flexShrink: 1,
     textAlign: 'right',
   },
   factLabel: {
-    fontFamily: fonts.body,
-    fontSize: 15,
-    color: colors.muted,
+    fontFamily: fonts.mono,
+    fontSize: 11,
+    letterSpacing: 1.4,
+    textTransform: 'uppercase',
+    color: colors.dim,
   },
 });

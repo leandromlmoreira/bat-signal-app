@@ -135,8 +135,8 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontFamily: fonts.mono,
-    fontSize: 10.5,
-    letterSpacing: 1,
+    fontSize: 11,
+    letterSpacing: 1.6,
     textTransform: 'uppercase',
     color: colors.dim,
   },
@@ -146,10 +146,10 @@ const styles = StyleSheet.create({
     gap: 6,
     paddingHorizontal: 12,
     paddingVertical: 8,
-    borderRadius: radii.pill,
+    borderRadius: radii.control,
   },
   clearHover: {
-    backgroundColor: 'rgba(255,91,74,0.1)',
+    backgroundColor: 'rgba(255,90,71,0.1)',
   },
   clearText: {
     fontFamily: fonts.label,
@@ -172,12 +172,12 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
     paddingRight: 10,
     borderRadius: radii.control,
-    backgroundColor: 'rgba(255,255,255,0.025)',
+    backgroundColor: 'rgba(160,184,220,0.03)',
     borderWidth: 1,
     borderColor: colors.hairline,
   },
   rowHover: {
-    backgroundColor: 'rgba(255,255,255,0.05)',
+    backgroundColor: 'rgba(160,184,220,0.06)',
     borderColor: colors.hairlineStrong,
   },
   rowCopy: {
@@ -185,19 +185,20 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   masked: {
-    fontFamily: fonts.mono,
+    fontFamily: fonts.code,
     fontSize: 14,
     color: colors.text,
   },
   meta: {
-    fontFamily: fonts.body,
-    fontSize: 14,
+    fontFamily: fonts.mono,
+    fontSize: 12,
+    letterSpacing: 0.6,
     color: colors.dim,
   },
   rowIcon: {
     width: 38,
     height: 38,
-    borderRadius: 19,
+    borderRadius: radii.tight,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'rgba(255,255,255,0.05)',
@@ -218,7 +219,7 @@ const styles = StyleSheet.create({
   emptyBadge: {
     width: 68,
     height: 68,
-    borderRadius: 34,
+    borderRadius: radii.control,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'rgba(255,255,255,0.03)',

@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { useFocusVisible } from '../../hooks/useFocusVisible';
-import { colors, fonts } from '../../theme/tokens';
+import { colors, fonts, radii } from '../../theme/tokens';
 
 interface AreaTabProps {
   label: string;
@@ -28,10 +28,10 @@ export function AreaTab({ label, width, selected, live, icon, onPress }: AreaTab
     >
       {(state) => {
         const { hovered } = state as typeof state & { hovered?: boolean };
-        const color = selected ? colors.onAmber : hovered ? colors.text : colors.muted;
+        const color = selected || hovered ? colors.text : colors.muted;
         return (
           <>
-            {icon(color)}
+            {icon(selected ? colors.amber : color)}
             <Text style={[styles.label, { color }]}>{label}</Text>
             {live && !selected && <View style={styles.live} />}
           </>
@@ -44,11 +44,11 @@ export function AreaTab({ label, width, selected, live, icon, onPress }: AreaTab
 const styles = StyleSheet.create({
   tab: {
     height: 42,
-    borderRadius: 999,
+    borderRadius: radii.control,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: 7,
+    gap: 8,
     cursor: 'pointer',
   },
   focused: {
@@ -59,18 +59,18 @@ const styles = StyleSheet.create({
   },
   label: {
     fontFamily: fonts.label,
-    fontSize: 16,
-    letterSpacing: 1.4,
+    fontSize: 15,
+    letterSpacing: 1.8,
     textTransform: 'uppercase',
   },
   live: {
     position: 'absolute',
-    top: 9,
-    right: 12,
+    top: 8,
+    right: 10,
     width: 6,
     height: 6,
     borderRadius: 3,
     backgroundColor: colors.amber,
-    boxShadow: '0 0 10px rgba(255,194,71,0.9)',
+    boxShadow: '0 0 10px rgba(255,197,61,0.9)',
   },
 });

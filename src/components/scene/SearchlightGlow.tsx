@@ -159,8 +159,8 @@ function SearchlightGlowView({ layout, power, animated }: GlowProps) {
       <Centered x={lamp.x} y={lamp.y} width={flareWidth} height={14 * scale} style={{ opacity: flareOpacity }}>
         <RadialSprite id="flare" width={flareWidth} height={14 * scale} stops={FLARE_STOPS} />
       </Centered>
-      <Centered x={geometry.mast.x} y={geometry.mast.top} width={26 * scale} height={26 * scale} style={{ opacity: beacon }}>
-        <RadialSprite id="beacon" width={26 * scale} height={26 * scale} stops={BEACON_STOPS} />
+      <Centered x={geometry.mast.x} y={geometry.mast.top} width={16 * scale} height={16 * scale} style={{ opacity: beacon }}>
+        <RadialSprite id="beacon" width={16 * scale} height={16 * scale} stops={BEACON_STOPS} />
       </Centered>
     </>
   );

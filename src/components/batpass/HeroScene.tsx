@@ -35,7 +35,7 @@ function sceneGeometry(width: number, height: number, compact: boolean) {
   return {
     horizon,
     disc,
-    target: { x: width - disc * 0.8, y: 40 + disc * 0.38 },
+    target: { x: width - disc * 0.66, y: 36 + disc * 0.36 },
     lamp: { x: width * 0.7, y: horizon - 70 },
     far: { minTop: height * 0.5, maxTop: height * 0.74 },
     near: { minTop: horizon - 90, maxTop: horizon - 20 },
@@ -74,10 +74,10 @@ function HeroSceneView({ width, height, compact }: HeroSceneProps) {
       <Svg width={width} height={height} style={StyleSheet.absoluteFill}>
         <Defs>
           <LinearGradient id="heroSky" x1="0" y1="0" x2="0" y2={horizon} gradientUnits="userSpaceOnUse">
-            <Stop offset="0" stopColor="#02040A" />
-            <Stop offset="0.6" stopColor="#081024" />
-            <Stop offset="0.9" stopColor="#171B2C" />
-            <Stop offset="1" stopColor="#3A2A26" />
+            <Stop offset="0" stopColor="#010205" />
+            <Stop offset="0.6" stopColor="#070B13" />
+            <Stop offset="0.9" stopColor="#111926" />
+            <Stop offset="1" stopColor="#1E2938" />
           </LinearGradient>
           <LinearGradient id="heroBeam" x1={lamp.x} y1={lamp.y} x2={target.x} y2={target.y} gradientUnits="userSpaceOnUse">
             <Stop offset="0" stopColor="#FFE3A0" stopOpacity={0.55} />
@@ -99,11 +99,11 @@ function HeroSceneView({ width, height, compact }: HeroSceneProps) {
         </Defs>
         <Rect x={0} y={0} width={width} height={horizon} fill="url(#heroSky)" />
         <Path d={beam} fill="url(#heroBeam)" />
-        <Path d={skylines.far.path} fill="#0F1526" />
+        <Path d={skylines.far.path} fill="#0D131D" />
         {skylines.far.lights.map((light) => (
           <Path key={`far${light.color}`} d={light.path} fill={light.color} opacity={0.4} />
         ))}
-        <Path d={skylines.near.path} fill="#070B14" />
+        <Path d={skylines.near.path} fill="#070A10" />
         {skylines.near.lights.map((light) => (
           <Path key={`near${light.color}`} d={light.path} fill={light.color} opacity={0.55} />
         ))}
@@ -125,7 +125,7 @@ function HeroSceneView({ width, height, compact }: HeroSceneProps) {
           },
         ]}
       >
-        <SignalEmblem id="hero" width={emblemWidth} />
+        <SignalEmblem id="hero" width={emblemWidth} clouds={false} />
       </View>
     </View>
   );

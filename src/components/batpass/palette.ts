@@ -6,7 +6,7 @@ export const strengthColors: Record<StrengthLevel, string> = {
   weak: colors.alert,
   fair: colors.amberDeep,
   strong: colors.amber,
-  fortress: colors.calm,
+  fortress: colors.amberHot,
 };
 
 export const glyphColors: Record<CharClass, string> = {

@@ -47,8 +47,8 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: fonts.display,
-    fontSize: 26,
-    letterSpacing: 1,
+    fontSize: 28,
+    letterSpacing: 1.4,
     textTransform: 'uppercase',
     color: colors.text,
   },

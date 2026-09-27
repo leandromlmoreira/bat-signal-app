@@ -7,7 +7,7 @@ import { HistoryPanel } from '../../components/batpass/HistoryPanel';
 import { OptionsPanel } from '../../components/batpass/OptionsPanel';
 import { PasswordPanel } from '../../components/batpass/PasswordPanel';
 import type { Chrome } from '../../components/shell/chrome';
-import { BezelCard } from '../../components/ui/BezelCard';
+import { Panel } from '../../components/ui/Panel';
 import { Reveal } from '../../components/ui/Reveal';
 import { Scrim } from '../../components/ui/Scrim';
 import type { HistoryEntry } from '../../domain/history.ts';
@@ -42,7 +42,7 @@ export function BatPassScreen({ chrome }: { chrome: Chrome }) {
   const coreStyle = [styles.cardCore, compact && styles.cardCoreCompact];
 
   const generatorCard = (
-    <BezelCard coreStyle={coreStyle}>
+    <Panel contentStyle={coreStyle}>
       <PasswordPanel
         password={password}
         strength={strength}
@@ -54,13 +54,13 @@ export function BatPassScreen({ chrome }: { chrome: Chrome }) {
       />
       <View style={styles.sectionGap} />
       <OptionsPanel options={generator.options} onLengthChange={generator.setLength} onToggle={generator.toggle} />
-    </BezelCard>
+    </Panel>
   );
 
   const historyCard = (
-    <BezelCard style={wide && styles.grow} coreStyle={coreStyle}>
+    <Panel style={wide && styles.grow} contentStyle={coreStyle}>
       <HistoryPanel entries={history.entries} ready={history.ready} copiedKey={clipboard.copiedKey} onCopy={copyEntry} onClear={history.clear} />
-    </BezelCard>
+    </Panel>
   );
 
   return (
@@ -155,8 +155,8 @@ const styles = StyleSheet.create({
     marginTop: 36,
     textAlign: 'center',
     fontFamily: fonts.mono,
-    fontSize: 10,
-    letterSpacing: 1.6,
+    fontSize: 11,
+    letterSpacing: 2,
     textTransform: 'uppercase',
     color: colors.dim,
   },

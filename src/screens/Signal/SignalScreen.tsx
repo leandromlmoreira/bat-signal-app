@@ -4,15 +4,18 @@ import * as Haptics from 'expo-haptics';
 
 import { GothamScene } from '../../components/scene/GothamScene';
 import type { Chrome } from '../../components/shell/chrome';
+import type { Strike } from '../../hooks/useLightning';
 import { useSceneLayout } from '../../hooks/useSceneLayout';
 import type { SignalState } from '../../hooks/useSignal';
 import { useSignalPower } from '../../hooks/useSignalPower';
+import type { Soundscape } from '../../hooks/useSoundscape';
 import { colors, isWeb } from '../../theme/tokens';
 import { CompactDeck } from './CompactDeck';
 import { WideDeck } from './WideDeck';
 
 interface SignalScreenProps {
   signal: SignalState;
+  sound: Soundscape;
   chrome: Chrome;
   animated: boolean;
   reducedMotion: boolean;
@@ -27,21 +30,25 @@ function feelSwitch(turningOn: boolean) {
   Haptics.impactAsync(style).catch(() => undefined);
 }
 
-export function SignalScreen({ signal, chrome, animated, reducedMotion, fontsReady }: SignalScreenProps) {
+export function SignalScreen({ signal, sound, chrome, animated, reducedMotion, fontsReady }: SignalScreenProps) {
   const layout = useSceneLayout(chrome.compact ? COMPACT_CHROME_OFFSET : 0);
   const power = useSignalPower(signal.active, reducedMotion);
   const { active, toggle } = signal;
 
   const handleToggle = useCallback(() => {
     feelSwitch(!active);
+    if (active) sound.shutdown();
+    else sound.ignite();
     toggle();
-  }, [active, toggle]);
+  }, [active, toggle, sound]);
+
+  const handleStrike = useCallback((strike: Strike) => sound.thunder(strike.distance), [sound]);
 
   const Deck = layout.wide ? WideDeck : CompactDeck;
 
   return (
     <View style={styles.root}>
-      <GothamScene layout={layout} power={power} animated={animated} />
+      <GothamScene layout={layout} power={power} animated={animated} onStrike={handleStrike} />
       {fontsReady && <Deck layout={layout} chrome={chrome} signal={signal} onToggle={handleToggle} animated={animated} />}
     </View>
   );

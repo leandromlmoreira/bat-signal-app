@@ -1,4 +1,4 @@
-import { createRandom, type Random } from './random';
+import { createRandom, type Random } from './random.ts';
 
 export interface RainOptions {
   width: number;
