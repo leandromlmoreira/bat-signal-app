@@ -9,6 +9,7 @@ import { useAreaRoute } from '../../hooks/useAreaRoute';
 import { useAreaTransition } from '../../hooks/useAreaTransition';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
 import { useSignal } from '../../hooks/useSignal';
+import { useSoundscape } from '../../hooks/useSoundscape';
 import { useVisited } from '../../hooks/useVisited';
 import { useAppFonts } from '../../theme/fonts';
 import { colors } from '../../theme/tokens';
@@ -23,6 +24,7 @@ export default function Central() {
   const insets = useSafeAreaInsets();
   const chrome = computeChrome(width, height, insets.top);
   const signal = useSignal();
+  const sound = useSoundscape(signal.active);
   const { area, navigate } = useAreaRoute();
   const { shown, progress } = useAreaTransition(area, reducedMotion);
   const visited = useVisited(shown);
@@ -30,10 +32,10 @@ export default function Central() {
   return (
     <View style={styles.root}>
       <StatusBar style="light" />
-      {fontsReady && <CommandBar area={area} chrome={chrome} signalActive={signal.active} onNavigate={navigate} />}
+      {fontsReady && <CommandBar area={area} chrome={chrome} signalActive={signal.active} sound={sound} onNavigate={navigate} />}
       {visited.has('signal') && (
         <AreaStage visible={shown === 'signal'} progress={progress}>
-          <SignalScreen signal={signal} chrome={chrome} animated={!reducedMotion && shown === 'signal'} reducedMotion={reducedMotion} fontsReady={fontsReady} />
+          <SignalScreen signal={signal} sound={sound} chrome={chrome} animated={!reducedMotion && shown === 'signal'} reducedMotion={reducedMotion} fontsReady={fontsReady} />
         </AreaStage>
       )}
       {fontsReady && visited.has('batpass') && (
