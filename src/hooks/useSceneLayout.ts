@@ -6,7 +6,7 @@ export const BEAM_ANGLE = 13;
 
 const WIDE_BREAKPOINT = 900;
 const LANDSCAPE_BREAKPOINT = 640;
-const SHORT_HEIGHT = 600;
+const SHORT_HEIGHT = 700;
 const TO_RADIANS = Math.PI / 180;
 
 export interface Point {
@@ -92,12 +92,12 @@ export function computeSceneLayout(width: number, height: number, top: number, b
   };
 }
 
-export function useSceneLayout() {
+export function useSceneLayout(extraTop = 0) {
   const { width, height } = useWindowDimensions();
   const insets = useSafeAreaInsets();
 
   return useMemo(
-    () => computeSceneLayout(width, height, insets.top, insets.bottom),
-    [width, height, insets.top, insets.bottom],
+    () => computeSceneLayout(width, height, insets.top + extraTop, insets.bottom),
+    [width, height, insets.top, insets.bottom, extraTop],
   );
 }

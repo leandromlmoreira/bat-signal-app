@@ -10,15 +10,6 @@ interface MastheadProps {
   baseDelay: number;
 }
 
-export function Eyebrow({ label }: { label: string }) {
-  return (
-    <View style={styles.eyebrow}>
-      <View style={styles.eyebrowMark} />
-      <Text style={styles.eyebrowText}>{label}</Text>
-    </View>
-  );
-}
-
 export function Masthead({ titleSize, showLead, stacked, baseDelay }: MastheadProps) {
   return (
     <View>
@@ -47,31 +38,6 @@ export function Masthead({ titleSize, showLead, stacked, baseDelay }: MastheadPr
 }
 
 const styles = StyleSheet.create({
-  eyebrow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    alignSelf: 'flex-start',
-    gap: 8,
-    paddingHorizontal: 12,
-    paddingVertical: 7,
-    borderRadius: 999,
-    backgroundColor: 'rgba(255,255,255,0.04)',
-    borderWidth: 1,
-    borderColor: colors.hairline,
-  },
-  eyebrowMark: {
-    width: 6,
-    height: 6,
-    backgroundColor: colors.amber,
-    transform: [{ rotate: '45deg' }],
-  },
-  eyebrowText: {
-    fontFamily: fonts.mono,
-    fontSize: 10,
-    letterSpacing: 1.8,
-    textTransform: 'uppercase',
-    color: colors.muted,
-  },
   title: {
     fontFamily: fonts.display,
     color: colors.text,

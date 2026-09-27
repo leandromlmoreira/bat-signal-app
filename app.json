@@ -21,10 +21,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png",
-      "name": "Bat-Sinal · Central de chamados do GCPD",
+      "name": "Bat-Sinal · Central do GCPD",
       "shortName": "Bat-Sinal",
       "themeColor": "#03050A",
-      "backgroundColor": "#03050A"
+      "backgroundColor": "#03050A",
+      "description": "Central do GCPD em React Native: acenda o Bat-Sinal nas nuvens de Gotham e gere senhas fortes no BatPass."
     },
     "experiments": {
       "baseUrl": "/bat-sinal"
