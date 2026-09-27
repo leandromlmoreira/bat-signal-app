@@ -1,8 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 
 import { CallCounter } from '../../components/ui/CallCounter';
-import { Eyebrow, Masthead } from '../../components/ui/Masthead';
-import { NightClock } from '../../components/ui/NightClock';
+import { Masthead } from '../../components/ui/Masthead';
 import { PoliceTerminal } from '../../components/ui/PoliceTerminal';
 import { Reveal } from '../../components/ui/Reveal';
 import { Scrim } from '../../components/ui/Scrim';
@@ -10,6 +9,7 @@ import { SignalButton } from '../../components/ui/SignalButton';
 import type { DeckProps } from './deckProps';
 
 const PANEL_HEIGHT = 250;
+const MASTHEAD_OFFSET = 60;
 
 export function CompactDeck({ layout, signal, onToggle, animated }: DeckProps) {
   const { width, height, insets } = layout;
@@ -18,11 +18,7 @@ export function CompactDeck({ layout, signal, onToggle, animated }: DeckProps) {
   return (
     <View style={StyleSheet.absoluteFill} pointerEvents="box-none">
       <Scrim width={width} height={height} direction="bottom" start={panelTop - 110} end={height - 30} strength={0.94} />
-      <View style={[styles.header, { top: insets.top + 16 }]} pointerEvents="box-none">
-        <Reveal delay={500} style={styles.headerRow}>
-          <Eyebrow label="GCPD · Chamados" />
-          <NightClock active={signal.active} compact />
-        </Reveal>
+      <View style={[styles.header, { top: insets.top + MASTHEAD_OFFSET }]} pointerEvents="box-none">
         <Masthead titleSize={Math.min(88, (width - 40) / 4.2)} showLead={false} stacked={false} baseDelay={580} />
       </View>
       <View style={[styles.panel, { bottom: insets.bottom + 18 }]} pointerEvents="box-none">
@@ -49,12 +45,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 20,
     right: 20,
-    gap: 12,
-  },
-  headerRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
   },
   panel: {
     position: 'absolute',

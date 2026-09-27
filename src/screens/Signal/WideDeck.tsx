@@ -1,8 +1,8 @@
 import { StyleSheet, View } from 'react-native';
 
 import { CallCounter } from '../../components/ui/CallCounter';
-import { Eyebrow, Masthead } from '../../components/ui/Masthead';
-import { NightClock } from '../../components/ui/NightClock';
+import { Eyebrow } from '../../components/ui/Eyebrow';
+import { Masthead } from '../../components/ui/Masthead';
 import { PoliceTerminal } from '../../components/ui/PoliceTerminal';
 import { Reveal } from '../../components/ui/Reveal';
 import { Scrim } from '../../components/ui/Scrim';
@@ -10,34 +10,34 @@ import { SignalButton } from '../../components/ui/SignalButton';
 import type { DeckProps } from './deckProps';
 
 function deckMetrics(width: number, height: number, short: boolean) {
-  const gutter = Math.max(short ? 28 : 48, width * 0.05);
   const columnWidth = Math.min(560, width * (short ? 0.46 : 0.4));
 
   if (short) {
-    return { gutter, columnWidth, titleSize: Math.min(columnWidth / 4.4, height * 0.2), counterSize: 46, events: 1, gap: 16 };
+    return { columnWidth, titleSize: Math.min(columnWidth / 4.4, height * 0.18), counterSize: 46, events: 1, gap: 14 };
   }
 
   const tall = height >= 820;
   return {
-    gutter,
     columnWidth,
-    titleSize: Math.min(columnWidth / 3.05, height * 0.165),
+    titleSize: Math.min(columnWidth / 3.05, height * 0.16),
     counterSize: 64,
     events: tall ? 3 : 2,
     gap: tall ? 36 : 26,
   };
 }
 
-export function WideDeck({ layout, signal, onToggle, animated }: DeckProps) {
+export function WideDeck({ layout, chrome, signal, onToggle, animated }: DeckProps) {
   const { width, height, short } = layout;
-  const { gutter, columnWidth, titleSize, counterSize, events, gap } = deckMetrics(width, height, short);
+  const { gutter } = chrome;
+  const { columnWidth, titleSize, counterSize, events, gap } = deckMetrics(width, height, short);
+  const top = chrome.top + chrome.height;
 
   return (
     <View style={StyleSheet.absoluteFill} pointerEvents="box-none">
       <Scrim width={width} height={height} direction="left" start={0} end={gutter + columnWidth * 1.35} strength={0.9} />
-      <View style={[styles.column, { left: gutter, width: columnWidth }]} pointerEvents="box-none">
+      <View style={[styles.column, { left: gutter, width: columnWidth, top }]} pointerEvents="box-none">
         <Reveal delay={500}>
-          <Eyebrow label="GCPD · Central de chamados" />
+          <Eyebrow label="Área 01 · Holofote do telhado" />
         </Reveal>
         <View style={{ marginTop: short ? 10 : 22 }}>
           <Masthead titleSize={titleSize} showLead={!short} stacked={!short} baseDelay={580} />
@@ -55,9 +55,6 @@ export function WideDeck({ layout, signal, onToggle, animated }: DeckProps) {
           />
         </Reveal>
       </View>
-      <Reveal delay={900} style={[styles.clock, { right: gutter, top: short ? 20 : 36 }]}>
-        <NightClock active={signal.active} />
-      </Reveal>
     </View>
   );
 }
@@ -65,7 +62,6 @@ export function WideDeck({ layout, signal, onToggle, animated }: DeckProps) {
 const styles = StyleSheet.create({
   column: {
     position: 'absolute',
-    top: 0,
     bottom: 0,
     justifyContent: 'center',
   },
@@ -77,8 +73,5 @@ const styles = StyleSheet.create({
   button: {
     flex: 1,
     maxWidth: 340,
-  },
-  clock: {
-    position: 'absolute',
   },
 });

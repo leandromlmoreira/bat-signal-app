@@ -31,6 +31,8 @@ jobs:
 
       - run: npm run lint
 
+      - run: npm test
+
       - name: Exportar a versão web (baseUrl /bat-sinal definido no app.json)
         run: npm run build
 

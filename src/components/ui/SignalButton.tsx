@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 import { Animated, Pressable, StyleSheet, Text, View, type StyleProp, type ViewStyle } from 'react-native';
 
+import { useFocusVisible } from '../../hooks/useFocusVisible';
 import { useAnimatedValue } from '../../hooks/useLoop';
-import { colors, easing, fonts, isWeb, nativeDriver } from '../../theme/tokens';
+import { colors, easing, fonts, nativeDriver } from '../../theme/tokens';
 import { PowerIcon } from './PowerIcon';
 
 interface SignalButtonProps {
@@ -37,6 +38,7 @@ function useInvitePulse(enabled: boolean) {
 export function SignalButton({ active, onPress, animated, dense = false, style }: SignalButtonProps) {
   const press = useAnimatedValue(1);
   const pulse = useInvitePulse(!active && animated);
+  const { focusVisible, onFocus, onBlur } = useFocusVisible();
 
   const animatePress = (toValue: number) =>
     Animated.spring(press, { toValue, stiffness: 520, damping: 30, mass: 0.6, useNativeDriver: nativeDriver }).start();
@@ -57,17 +59,19 @@ export function SignalButton({ active, onPress, animated, dense = false, style }
         onPress={onPress}
         onPressIn={() => animatePress(0.97)}
         onPressOut={() => animatePress(1)}
+        onFocus={onFocus}
+        onBlur={onBlur}
         role="switch"
         aria-checked={active}
         aria-label={label}
         style={(state) => {
-          const { hovered, focused } = state as typeof state & { hovered?: boolean; focused?: boolean };
+          const { hovered } = state as typeof state & { hovered?: boolean };
           return [
             styles.button,
             dense && styles.buttonDense,
             active ? styles.buttonActive : styles.buttonIdle,
             hovered && (active ? styles.hoverActive : styles.hoverIdle),
-            focused && isWeb && styles.focused,
+            focusVisible && styles.focused,
           ];
         }}
       >
