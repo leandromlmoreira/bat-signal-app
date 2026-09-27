@@ -1,55 +1,57 @@
-# 🦇 BatPass — Gerador de Senhas Fortes
+# BatPass
 
-Desafio de projeto **"Sequenciador de senhas do Batman com React Native"** da trilha
-[Formação React Native Developer](https://web.dio.me/track/formacao-react-native-developer)
-(DIO). Inspirado no projeto de referência do instrutor
-([felipeAguiarCode/react-native-bat-pass-generator](https://github.com/felipeAguiarCode/react-native-bat-pass-generator)),
-construído do zero em TypeScript.
+Gerador de senhas com identidade noturna: força medida em bits de entropia reais, aleatoriedade criptográfica e histórico que nunca sai do seu aparelho.
 
-## O que o projeto faz
+**[Ver ao vivo](https://leandromlmoreira.github.io/react-native-bat-pass/)**
 
-Gera senhas fortes e aleatórias com comprimento e composição configuráveis
-(maiúsculas, números, símbolos) e copia o resultado para a área de transferência
-com um toque.
+![BatPass no desktop](docs/preview.png)
 
-## Tecnologias
+<p align="center">
+  <img src="docs/preview-mobile.png" alt="BatPass no celular" width="320" />
+</p>
 
-- React Native + Expo (SDK 57)
-- TypeScript
-- `expo-clipboard` para copiar a senha gerada
+## Funcionalidades
 
-## Como executar
+- **Aleatoriedade criptográfica**: `expo-crypto` (`getRandomValues`) com amostragem por rejeição, sem viés de módulo e sem `Math.random`.
+- **Opções completas**: comprimento de 8 a 64 (slider arrastável e botões de passo), maiúsculas, números, símbolos e evitar caracteres ambíguos (`I l 1 O 0` e afins).
+- **Garantia de composição**: cada tipo ativo aparece ao menos uma vez, com embaralhamento Fisher-Yates.
+- **Medidor de força com entropia real**: `comprimento × log2(tamanho do alfabeto)`, quatro níveis e estimativa de tempo de força bruta a 100 bilhões de tentativas por segundo.
+- **Copiar com feedback**: `expo-clipboard`, botão que vira "Copiada" com ícone de confirmação e aviso para leitores de tela.
+- **Histórico persistente**: últimas 10 senhas copiadas, mascaradas na lista, salvas com AsyncStorage (localStorage na web). Copiar de novo com um toque, ou limpar tudo.
+- **Detalhes de produto**: senha colorida por tipo de caractere, efeito de decodificação ao gerar (desligado com "reduzir movimento"), estados de hover, foco por teclado, vazio e carregando, layout em duas colunas no desktop e empilhado no celular.
+- **Ilustração própria**: sinal no céu, feixe de luz e skyline desenhados em SVG, sem assets de terceiros.
+
+## Stack
+
+- React Native 0.86 + Expo SDK 57 + TypeScript
+- react-native-web para a versão web, publicada no GitHub Pages via GitHub Actions
+- expo-crypto, expo-clipboard, @react-native-async-storage/async-storage, react-native-svg, expo-linear-gradient
+- Fontes do Google Fonts via `@expo-google-fonts`: Big Shoulders Display, DM Sans e JetBrains Mono
+- Testes das regras de negócio com o test runner nativo do Node
+
+## Arquitetura
+
+```
+src/
+  domain/      regras puras e testadas: geração, entropia, histórico
+  services/    aleatoriedade segura (expo-crypto) e armazenamento
+  hooks/       estado da tela: gerador, histórico, cópia, animação
+  components/  peças pequenas de interface
+  screens/     composição da tela
+  theme/       cores, fontes, raios e curvas de animação
+```
+
+## Como rodar
 
 ```bash
 npm install
-npm run web      # roda no navegador (mais rápido para testar)
-npm run android   # ou ios, com Expo Go / emulador
+npm run web          # navegador
+npm run android      # ou npm run ios, com Expo Go ou emulador
+npm test             # testes do domínio
+npm run typecheck    # TypeScript
+npm run build:web    # exporta a versão web para dist/
 ```
 
-## Melhoria implementada
+---
 
-O projeto de referência gera a senha; aqui adicionei:
-
-- **Opções configuráveis**: comprimento (4–64), incluir maiúsculas, números e
-  símbolos, cada uma com um `Switch` independente.
-- **Copiar para a área de transferência** com feedback visual ("Copiado!").
-- Tema visual escuro com acento amarelo (Batman), usando só `StyleSheet` (sem
-  bibliotecas externas de UI).
-
-## Como testar
-
-Rodei `npm run web` e testei manualmente: gerar senha com as opções padrão,
-alternar cada switch e conferir que a senha muda de composição, e copiar a
-senha (o navegador confirma o clipboard). Não testei em dispositivo físico
-Android/iOS.
-
-## O que aprendi
-
-- `useState` para estado de formulário (comprimento, switches) e para o
-  resultado gerado.
-- `TouchableOpacity` com estado `disabled` (o botão de copiar só habilita
-  quando existe uma senha).
-- `expo-clipboard` como a forma correta (e multiplataforma) de acessar a
-  área de transferência em vez de qualquer API do navegador.
-- Testar um app Expo sem emulador Android/iOS instalado, usando `expo start --web`
-  (react-native-web) para validar layout e lógica rapidamente.
+<sub>Nasceu como desafio da Formação React Native Developer da DIO, inspirado no projeto de referência de Felipe Aguiar.</sub>
