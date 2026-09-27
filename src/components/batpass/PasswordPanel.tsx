@@ -4,7 +4,6 @@ import type { Strength } from '../../domain/strength.ts';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
 import { useScramble } from '../../hooks/useScramble';
 import { colors, fonts, radii } from '../../theme/tokens';
-import { Eyebrow } from '../ui/Eyebrow';
 import { CheckIcon, CopyIcon, RefreshIcon } from '../ui/Icons';
 import { ActionButton } from './ActionButton';
 import { PasswordText } from './PasswordText';
@@ -42,7 +41,10 @@ export function PasswordPanel({ password, strength, copied, copyFailed, compact,
   return (
     <View style={styles.container}>
       <View style={styles.topRow}>
-        <Eyebrow label="Senha gerada" tone="amber" />
+        <View style={styles.tag}>
+          <View style={styles.tagMark} />
+          <Text style={styles.tagText}>Senha gerada</Text>
+        </View>
         <Text style={styles.count}>{password.length} caracteres</Text>
       </View>
       <View style={[styles.readout, compact && styles.readoutCompact]}>
@@ -54,6 +56,7 @@ export function PasswordPanel({ password, strength, copied, copyFailed, compact,
       <View style={[styles.actions, compact && styles.actionsCompact]}>
         <ActionButton
           grow={!compact}
+          confirmed={copied}
           label={copied ? 'Copiada' : 'Copiar senha'}
           onPress={onCopy}
           accessibilityHint="Copia a senha e guarda no histórico deste aparelho"
@@ -85,10 +88,27 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
+  tag: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  tagMark: {
+    width: 10,
+    height: 2,
+    backgroundColor: colors.amber,
+  },
+  tagText: {
+    fontFamily: fonts.mono,
+    fontSize: 11,
+    letterSpacing: 2,
+    textTransform: 'uppercase',
+    color: colors.amber,
+  },
   count: {
     fontFamily: fonts.mono,
     fontSize: 11,
-    letterSpacing: 1,
+    letterSpacing: 2,
     textTransform: 'uppercase',
     color: colors.dim,
   },
@@ -99,11 +119,11 @@ const styles = StyleSheet.create({
     gap: 14,
     paddingHorizontal: 22,
     paddingVertical: 18,
-    borderRadius: radii.control + 2,
-    backgroundColor: 'rgba(3,5,10,0.7)',
+    borderRadius: radii.control,
+    backgroundColor: '#030509',
     borderWidth: 1,
-    borderColor: colors.hairline,
-    boxShadow: 'inset 0 2px 14px rgba(0,0,0,0.5)',
+    borderColor: colors.hairlineStrong,
+    boxShadow: 'inset 0 2px 18px rgba(0,0,0,0.7), 0 0 0 4px rgba(160,184,220,0.03)',
   },
   readoutCompact: {
     minHeight: 96,
@@ -111,7 +131,7 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   prompt: {
-    fontFamily: fonts.monoBold,
+    fontFamily: fonts.code,
     fontSize: 22,
     color: colors.amber,
   },
@@ -129,8 +149,9 @@ const styles = StyleSheet.create({
     marginTop: -8,
     minHeight: 18,
     fontFamily: fonts.mono,
-    fontSize: 11,
-    letterSpacing: 0.6,
+    fontSize: 12,
+    letterSpacing: 1.2,
+    textTransform: 'uppercase',
     color: colors.amber,
   },
   statusError: {

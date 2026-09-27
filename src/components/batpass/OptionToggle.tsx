@@ -24,7 +24,7 @@ function Switch({ value }: { value: boolean }) {
     Animated.timing(progress, { toValue: value ? 1 : 0, duration: 260, easing: easing.drawer, useNativeDriver: false }).start();
   }, [progress, value]);
 
-  const backgroundColor = progress.interpolate({ inputRange: [0, 1], outputRange: ['rgba(255,255,255,0.08)', colors.amber] });
+  const backgroundColor = progress.interpolate({ inputRange: [0, 1], outputRange: ['rgba(160,184,220,0.12)', colors.amber] });
   const knobColor = progress.interpolate({ inputRange: [0, 1], outputRange: [colors.muted, colors.onAmber] });
   const translateX = progress.interpolate({ inputRange: [0, 1], outputRange: [0, TRAVEL] });
 
@@ -68,15 +68,15 @@ const styles = StyleSheet.create({
     borderRadius: radii.control,
   },
   rowHover: {
-    backgroundColor: 'rgba(255,255,255,0.03)',
+    backgroundColor: 'rgba(160,184,220,0.05)',
   },
   sample: {
     width: 50,
     height: 40,
-    borderRadius: 12,
+    borderRadius: radii.control,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'rgba(255,255,255,0.03)',
+    backgroundColor: 'rgba(160,184,220,0.03)',
     borderWidth: 1,
     borderColor: colors.hairline,
   },
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     borderColor: colors.amberLine,
   },
   sampleText: {
-    fontFamily: fonts.monoBold,
+    fontFamily: fonts.code,
     fontSize: 12,
     color: colors.dim,
   },
@@ -97,8 +97,9 @@ const styles = StyleSheet.create({
   },
   label: {
     fontFamily: fonts.label,
-    fontSize: 18,
-    letterSpacing: 0.4,
+    fontSize: 17,
+    letterSpacing: 1.2,
+    textTransform: 'uppercase',
     color: colors.text,
   },
   hint: {
@@ -110,12 +111,12 @@ const styles = StyleSheet.create({
   track: {
     width: TRACK_WIDTH,
     height: KNOB + 6,
-    borderRadius: 13,
+    borderRadius: radii.control,
     padding: 3,
   },
   knob: {
     width: KNOB,
     height: KNOB,
-    borderRadius: KNOB / 2,
+    borderRadius: radii.tight,
   },
 });

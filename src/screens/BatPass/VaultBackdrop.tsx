@@ -11,17 +11,17 @@ function VaultBackdropView() {
     <Svg width={width} height={height} style={StyleSheet.absoluteFill} pointerEvents="none">
       <Defs>
         <LinearGradient id="vaultSky" x1="0" y1="0" x2="0" y2={height} gradientUnits="userSpaceOnUse">
-          <Stop offset="0" stopColor="#050915" />
+          <Stop offset="0" stopColor="#070B12" />
           <Stop offset="0.55" stopColor={colors.night} />
           <Stop offset="1" stopColor="#02030A" />
         </LinearGradient>
         <RadialGradient id="vaultGlow" cx="50%" cy="50%" r="50%">
-          <Stop offset="0" stopColor={colors.amberDeep} stopOpacity={0.16} />
+          <Stop offset="0" stopColor={colors.amberDeep} stopOpacity={0.08} />
           <Stop offset="1" stopColor={colors.amberDeep} stopOpacity={0} />
         </RadialGradient>
         <RadialGradient id="vaultCold" cx="50%" cy="50%" r="50%">
-          <Stop offset="0" stopColor="#3A5FA8" stopOpacity={0.1} />
-          <Stop offset="1" stopColor="#3A5FA8" stopOpacity={0} />
+          <Stop offset="0" stopColor="#4A6284" stopOpacity={0.16} />
+          <Stop offset="1" stopColor="#4A6284" stopOpacity={0} />
         </RadialGradient>
       </Defs>
       <Rect x={0} y={0} width={width} height={height} fill="url(#vaultSky)" />

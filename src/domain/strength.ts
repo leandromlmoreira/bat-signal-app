@@ -60,3 +60,14 @@ export function evaluateStrength(length: number, alphabetSize: number): Strength
     crackTime: formatDuration(crackSeconds(bits)),
   };
 }
+
+export const METER_MAX_BITS = 128;
+
+export const METER_MARKS = LEVELS.filter((candidate) => candidate.min > 0)
+  .map((candidate) => ({ bits: candidate.min, label: candidate.label, progress: candidate.min / METER_MAX_BITS }))
+  .reverse();
+
+export function meterProgress(bits: number): number {
+  if (!Number.isFinite(bits) || bits <= 0) return 0;
+  return Math.min(1, bits / METER_MAX_BITS);
+}

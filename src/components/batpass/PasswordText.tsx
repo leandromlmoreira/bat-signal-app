@@ -30,7 +30,7 @@ export function PasswordText({ value, size, settled }: PasswordTextProps) {
 
 const styles = StyleSheet.create({
   text: {
-    fontFamily: fonts.mono,
+    fontFamily: fonts.code,
     letterSpacing: 1,
     color: colors.text,
   },

@@ -11,9 +11,10 @@ interface ActionButtonProps {
   variant?: 'primary' | 'ghost';
   accessibilityHint?: string;
   grow?: boolean;
+  confirmed?: boolean;
 }
 
-export function ActionButton({ label, icon, onPress, variant = 'primary', accessibilityHint, grow }: ActionButtonProps) {
+export function ActionButton({ label, icon, onPress, variant = 'primary', accessibilityHint, grow, confirmed = false }: ActionButtonProps) {
   const primary = variant === 'primary';
   const foreground = primary ? colors.onAmber : colors.text;
 
@@ -28,6 +29,7 @@ export function ActionButton({ label, icon, onPress, variant = 'primary', access
         styles.button,
         primary ? styles.primary : styles.ghost,
         hovered && (primary ? styles.primaryHover : styles.ghostHover),
+        confirmed && styles.confirmed,
       ]}
     >
       {({ hovered }) => (
@@ -35,8 +37,15 @@ export function ActionButton({ label, icon, onPress, variant = 'primary', access
           <Text style={[styles.label, { color: foreground }]} numberOfLines={1}>
             {label}
           </Text>
-          <View style={[styles.iconWell, primary ? styles.iconWellPrimary : styles.iconWellGhost, hovered && styles.iconWellHover]}>
-            {icon(foreground)}
+          <View
+            style={[
+              styles.iconWell,
+              primary ? styles.iconWellPrimary : styles.iconWellGhost,
+              hovered && styles.iconWellHover,
+              confirmed && styles.iconWellConfirmed,
+            ]}
+          >
+            {icon(confirmed ? colors.amber : foreground)}
           </View>
         </>
       )}
@@ -57,44 +66,51 @@ const styles = StyleSheet.create({
     gap: 14,
     paddingLeft: 22,
     paddingRight: 7,
-    borderRadius: radii.pill,
+    borderRadius: radii.control,
     borderWidth: 1,
   },
   primary: {
     backgroundColor: colors.amber,
-    borderColor: 'rgba(255,233,179,0.8)',
-    boxShadow: '0 12px 36px rgba(255,194,71,0.26), inset 0 1px 0 rgba(255,255,255,0.55)',
+    borderColor: colors.amberSoft,
+    boxShadow: '0 12px 36px rgba(255,197,61,0.22), inset 0 1px 0 rgba(255,255,255,0.5)',
   },
   primaryHover: {
     backgroundColor: colors.amberSoft,
   },
   ghost: {
-    backgroundColor: 'rgba(255,255,255,0.04)',
+    backgroundColor: 'rgba(160,184,220,0.04)',
     borderColor: colors.hairlineStrong,
   },
   ghostHover: {
-    backgroundColor: 'rgba(255,255,255,0.08)',
+    backgroundColor: 'rgba(160,184,220,0.08)',
     borderColor: colors.amberLine,
   },
   label: {
     flexShrink: 1,
-    fontFamily: fonts.label,
-    fontSize: 18,
-    letterSpacing: 1.4,
+    fontFamily: fonts.heading,
+    fontSize: 16,
+    letterSpacing: 2.2,
     textTransform: 'uppercase',
   },
   iconWell: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
+    width: 42,
+    height: 42,
+    borderRadius: radii.tight,
     alignItems: 'center',
     justifyContent: 'center',
   },
   iconWellPrimary: {
-    backgroundColor: 'rgba(22,16,5,0.1)',
+    backgroundColor: 'rgba(20,14,2,0.12)',
   },
   iconWellGhost: {
-    backgroundColor: 'rgba(255,255,255,0.06)',
+    backgroundColor: 'rgba(160,184,220,0.08)',
+  },
+  confirmed: {
+    backgroundColor: colors.amberHot,
+    boxShadow: '0 0 0 4px rgba(255,197,61,0.18), 0 12px 40px rgba(255,197,61,0.35)',
+  },
+  iconWellConfirmed: {
+    backgroundColor: colors.onAmber,
   },
   iconWellHover: {
     transform: [{ translateX: 2 }, { scale: 1.06 }],
