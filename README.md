@@ -2,7 +2,7 @@
 
 Gerador de senhas com identidade noturna: força medida em bits de entropia reais, aleatoriedade criptográfica e histórico que nunca sai do seu aparelho.
 
-**[Ver ao vivo](https://leandromlmoreira.github.io/react-native-bat-pass/)**
+**[Ver ao vivo](https://leandromlmoreira.github.io/bat-pass/)**
 
 ![BatPass no desktop](docs/preview.png)
 
@@ -19,7 +19,7 @@ Gerador de senhas com identidade noturna: força medida em bits de entropia reai
 - **Copiar com feedback**: `expo-clipboard`, botão que vira "Copiada" com ícone de confirmação e aviso para leitores de tela.
 - **Histórico persistente**: últimas 10 senhas copiadas, mascaradas na lista, salvas com AsyncStorage (localStorage na web). Copiar de novo com um toque, ou limpar tudo.
 - **Detalhes de produto**: senha colorida por tipo de caractere, efeito de decodificação ao gerar (desligado com "reduzir movimento"), estados de hover, foco por teclado, vazio e carregando, layout em duas colunas no desktop e empilhado no celular.
-- **Ilustração própria**: sinal no céu, feixe de luz e skyline desenhados em SVG, sem assets de terceiros.
+- **Ilustração em SVG**: céu, feixe de luz e skyline desenhados no projeto; o morcego clássico do Bat-Sinal aparece no logo, no sinal do hero, no favicon e nos ícones do app.
 
 ## Stack
 
@@ -51,6 +51,11 @@ npm test             # testes do domínio
 npm run typecheck    # TypeScript
 npm run build:web    # exporta a versão web para dist/
 ```
+
+## Créditos
+
+- Símbolo do morcego: [Batman, do SVG Repo](https://www.svgrepo.com/svg/485626/batman), usado no logo, no sinal do hero, no favicon e nos ícones gerados em `assets/`.
+- Batman e o Bat-Sinal são marcas registradas da DC Comics. O BatPass é um projeto de fã, sem fins comerciais e sem vínculo com a DC.
 
 ---
 
