@@ -5,7 +5,7 @@ import { useBlink } from '../../hooks/useLoop';
 import { useNow } from '../../hooks/useNow';
 import type { SignalEvent } from '../../hooks/useSignal';
 import { formatClock, formatElapsed } from '../../lib/format';
-import { colors, fonts, isWeb } from '../../theme/tokens';
+import { colors, fonts, isWeb, radii } from '../../theme/tokens';
 import { Reveal } from './Reveal';
 
 interface PoliceTerminalProps {
@@ -84,32 +84,29 @@ export const PoliceTerminal = memo(PoliceTerminalView);
 
 const styles = StyleSheet.create({
   shell: {
-    borderRadius: 22,
-    padding: 5,
-    backgroundColor: 'rgba(255,255,255,0.035)',
+    borderRadius: radii.panel,
     borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.07)',
-  },
-  core: {
-    borderRadius: 17,
-    backgroundColor: 'rgba(5,8,15,0.84)',
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.05)',
-    boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.06)',
+    borderColor: colors.hairlineStrong,
+    backgroundColor: 'rgba(6,9,14,0.84)',
+    boxShadow: '0 24px 60px rgba(0,0,0,0.5)',
     overflow: 'hidden',
   },
+  core: {
+    backgroundColor: 'rgba(6,9,14,0.84)',
+  },
   glass: {
-    backgroundColor: 'rgba(5,8,15,0.62)',
-    backdropFilter: 'blur(14px)',
+    backgroundColor: 'rgba(6,9,14,0.58)',
+    backdropFilter: 'blur(12px)',
   } as ViewStyle,
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 14,
-    paddingVertical: 10,
+    paddingVertical: 9,
     borderBottomWidth: 1,
     borderBottomColor: colors.hairline,
+    backgroundColor: 'rgba(160,184,220,0.04)',
   },
   headerSide: {
     flexDirection: 'row',
@@ -117,17 +114,16 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   badge: {
-    width: 7,
-    height: 7,
+    width: 10,
+    height: 2,
     backgroundColor: colors.amber,
-    transform: [{ rotate: '45deg' }],
   },
   headerText: {
     fontFamily: fonts.mono,
-    fontSize: 10,
-    letterSpacing: 1.6,
+    fontSize: 11,
+    letterSpacing: 2,
     textTransform: 'uppercase',
-    color: colors.dim,
+    color: colors.muted,
   },
   headerLive: {
     color: colors.amber,
@@ -138,27 +134,26 @@ const styles = StyleSheet.create({
     borderRadius: 3,
   },
   dotIdle: {
-    backgroundColor: '#5FD39A',
-    boxShadow: '0 0 8px rgba(95,211,154,0.7)',
+    backgroundColor: colors.fog,
   },
   dotLive: {
     backgroundColor: colors.amber,
-    boxShadow: '0 0 10px rgba(255,194,71,0.9)',
+    boxShadow: '0 0 10px rgba(255,197,61,0.9)',
   },
   body: {
     paddingHorizontal: 14,
-    paddingTop: 10,
-    paddingBottom: 12,
-    gap: 5,
+    paddingTop: 11,
+    paddingBottom: 13,
+    gap: 4,
   },
   line: {
     fontFamily: fonts.mono,
-    fontSize: 11.5,
-    lineHeight: 17,
+    fontSize: 13,
+    lineHeight: 19,
     color: colors.muted,
   },
   lineDense: {
-    fontSize: 10.5,
+    fontSize: 12,
   },
   time: {
     color: colors.dim,
@@ -166,17 +161,17 @@ const styles = StyleSheet.create({
   statusRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 3,
+    marginTop: 4,
   },
   status: {
     flexShrink: 1,
-    fontFamily: fonts.monoBold,
-    fontSize: 12,
-    lineHeight: 18,
+    fontFamily: fonts.mono,
+    fontSize: 13.5,
+    lineHeight: 19,
     color: colors.text,
   },
   statusDense: {
-    fontSize: 10.5,
+    fontSize: 12,
   },
   prompt: {
     color: colors.amber,
@@ -192,8 +187,8 @@ const styles = StyleSheet.create({
     color: colors.muted,
   },
   cursor: {
-    width: 7,
-    height: 14,
+    width: 8,
+    height: 15,
     marginLeft: 4,
     backgroundColor: colors.amber,
   },

@@ -3,7 +3,7 @@ import { Animated, Pressable, StyleSheet, Text, View, type StyleProp, type ViewS
 
 import { useFocusVisible } from '../../hooks/useFocusVisible';
 import { useAnimatedValue } from '../../hooks/useLoop';
-import { colors, easing, fonts, nativeDriver } from '../../theme/tokens';
+import { colors, easing, fonts, nativeDriver, radii } from '../../theme/tokens';
 import { PowerIcon } from './PowerIcon';
 
 interface SignalButtonProps {
@@ -96,13 +96,13 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     left: 0,
-    borderRadius: 999,
+    borderRadius: radii.control,
     backgroundColor: colors.amber,
   },
   button: {
     height: 62,
-    borderRadius: 999,
-    paddingLeft: 26,
+    borderRadius: radii.control,
+    paddingLeft: 24,
     paddingRight: 8,
     flexDirection: 'row',
     alignItems: 'center',
@@ -112,25 +112,25 @@ const styles = StyleSheet.create({
   },
   buttonDense: {
     height: 56,
-    paddingLeft: 20,
+    paddingLeft: 18,
     paddingRight: 6,
     gap: 10,
   },
   buttonIdle: {
     backgroundColor: colors.amber,
-    borderColor: 'rgba(255,233,179,0.8)',
-    boxShadow: '0 12px 40px rgba(255,194,71,0.32), inset 0 1px 0 rgba(255,255,255,0.55)',
+    borderColor: colors.amberSoft,
+    boxShadow: '0 14px 44px rgba(255,197,61,0.28), inset 0 1px 0 rgba(255,255,255,0.5)',
   },
   buttonActive: {
-    backgroundColor: 'rgba(12,16,26,0.72)',
-    borderColor: 'rgba(255,194,71,0.45)',
-    boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.08)',
+    backgroundColor: 'rgba(6,9,14,0.78)',
+    borderColor: colors.amberLine,
+    boxShadow: '0 14px 40px rgba(0,0,0,0.45)',
   },
   hoverIdle: {
     backgroundColor: colors.amberSoft,
   },
   hoverActive: {
-    borderColor: 'rgba(255,194,71,0.8)',
+    borderColor: 'rgba(255,197,61,0.75)',
   },
   focused: {
     outlineWidth: 2,
@@ -140,15 +140,15 @@ const styles = StyleSheet.create({
   },
   label: {
     flexShrink: 1,
-    fontFamily: fonts.label,
-    fontSize: 19,
-    letterSpacing: 1.6,
+    fontFamily: fonts.heading,
+    fontSize: 18,
+    letterSpacing: 2.6,
     textTransform: 'uppercase',
     color: colors.onAmber,
   },
   labelDense: {
-    fontSize: 17,
-    letterSpacing: 1,
+    fontSize: 16,
+    letterSpacing: 1.6,
   },
   labelActive: {
     color: colors.amber,
@@ -156,17 +156,16 @@ const styles = StyleSheet.create({
   icon: {
     width: 46,
     height: 46,
-    borderRadius: 23,
+    borderRadius: radii.tight,
     alignItems: 'center',
     justifyContent: 'center',
   },
   iconDense: {
     width: 42,
     height: 42,
-    borderRadius: 21,
   },
   iconIdle: {
-    backgroundColor: 'rgba(22,16,5,0.1)',
+    backgroundColor: 'rgba(20,14,2,0.12)',
   },
   iconActive: {
     backgroundColor: colors.amber,

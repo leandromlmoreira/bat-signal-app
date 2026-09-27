@@ -1,19 +1,21 @@
 import { useFonts } from 'expo-font';
-import { BarlowCondensed_500Medium } from '@expo-google-fonts/barlow-condensed/500Medium';
-import { BarlowCondensed_600SemiBold } from '@expo-google-fonts/barlow-condensed/600SemiBold';
-import { BigShoulders_800ExtraBold } from '@expo-google-fonts/big-shoulders/800ExtraBold';
-import { BigShoulders_900Black } from '@expo-google-fonts/big-shoulders/900Black';
+import { Anton_400Regular } from '@expo-google-fonts/anton/400Regular';
 import { JetBrainsMono_500Medium } from '@expo-google-fonts/jetbrains-mono/500Medium';
-import { JetBrainsMono_700Bold } from '@expo-google-fonts/jetbrains-mono/700Bold';
+import { Oswald_300Light } from '@expo-google-fonts/oswald/300Light';
+import { Oswald_400Regular } from '@expo-google-fonts/oswald/400Regular';
+import { Oswald_500Medium } from '@expo-google-fonts/oswald/500Medium';
+import { Oswald_600SemiBold } from '@expo-google-fonts/oswald/600SemiBold';
+import { ShareTechMono_400Regular } from '@expo-google-fonts/share-tech-mono/400Regular';
 
 export function useAppFonts() {
   const [loaded, error] = useFonts({
-    BarlowCondensed_500Medium,
-    BarlowCondensed_600SemiBold,
-    BigShoulders_800ExtraBold,
-    BigShoulders_900Black,
+    Anton_400Regular,
     JetBrainsMono_500Medium,
-    JetBrainsMono_700Bold,
+    Oswald_300Light,
+    Oswald_400Regular,
+    Oswald_500Medium,
+    Oswald_600SemiBold,
+    ShareTechMono_400Regular,
   });
 
   return loaded || Boolean(error);

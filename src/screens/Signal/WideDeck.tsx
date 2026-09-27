@@ -1,7 +1,6 @@
 import { StyleSheet, View } from 'react-native';
 
 import { CallCounter } from '../../components/ui/CallCounter';
-import { Eyebrow } from '../../components/ui/Eyebrow';
 import { Masthead } from '../../components/ui/Masthead';
 import { PoliceTerminal } from '../../components/ui/PoliceTerminal';
 import { Reveal } from '../../components/ui/Reveal';
@@ -13,14 +12,14 @@ function deckMetrics(width: number, height: number, short: boolean) {
   const columnWidth = Math.min(560, width * (short ? 0.46 : 0.4));
 
   if (short) {
-    return { columnWidth, titleSize: Math.min(columnWidth / 4.4, height * 0.18), counterSize: 46, events: 1, gap: 14 };
+    return { columnWidth, titleSize: Math.min(columnWidth / 4.6, height * 0.2), counterSize: 48, events: 1, gap: 14 };
   }
 
   const tall = height >= 820;
   return {
     columnWidth,
-    titleSize: Math.min(columnWidth / 3.05, height * 0.16),
-    counterSize: 64,
+    titleSize: Math.min(columnWidth / 2.55, height * 0.21),
+    counterSize: 66,
     events: tall ? 3 : 2,
     gap: tall ? 36 : 26,
   };
@@ -36,10 +35,7 @@ export function WideDeck({ layout, chrome, signal, onToggle, animated }: DeckPro
     <View style={StyleSheet.absoluteFill} pointerEvents="box-none">
       <Scrim width={width} height={height} direction="left" start={0} end={gutter + columnWidth * 1.35} strength={0.9} />
       <View style={[styles.column, { left: gutter, width: columnWidth, top }]} pointerEvents="box-none">
-        <Reveal delay={500}>
-          <Eyebrow label="Área 01 · Holofote do telhado" />
-        </Reveal>
-        <View style={{ marginTop: short ? 10 : 22 }}>
+        <View>
           <Masthead titleSize={titleSize} showLead={!short} stacked={!short} baseDelay={580} />
         </View>
         <Reveal delay={760} style={[styles.controls, { marginTop: gap }]}>

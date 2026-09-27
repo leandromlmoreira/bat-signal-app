@@ -30,7 +30,7 @@ export function CallCounter({ calls, size }: CallCounterProps) {
     <View style={styles.counter} accessible accessibilityLabel={`${calls} chamados nesta noite`}>
       <Text style={styles.label}>Chamados</Text>
       <Animated.View style={{ transform: [{ translateY }, { scale }] }}>
-        <Text style={[styles.value, { fontSize: size, lineHeight: size * 0.96 }]}>
+        <Text style={[styles.value, { fontSize: size, lineHeight: size * 1.08 }]}>
           <Text style={styles.leading}>{digits.slice(0, leading)}</Text>
           {digits.slice(leading)}
         </Text>
@@ -45,8 +45,8 @@ const styles = StyleSheet.create({
   },
   label: {
     fontFamily: fonts.mono,
-    fontSize: 10,
-    letterSpacing: 2.2,
+    fontSize: 11,
+    letterSpacing: 2.4,
     textTransform: 'uppercase',
     color: colors.dim,
     marginBottom: 2,
@@ -58,6 +58,6 @@ const styles = StyleSheet.create({
     includeFontPadding: false,
   },
   leading: {
-    color: 'rgba(255,194,71,0.28)',
+    color: 'rgba(255,197,61,0.26)',
   },
 });

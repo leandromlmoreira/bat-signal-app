@@ -15,19 +15,18 @@ interface ProjectionProps {
 function ProjectionView({ layout, power, animated }: ProjectionProps) {
   const width = emblemWidthForDisc(layout.projectionWidth);
   const height = width * (EMBLEM_VIEW.height / EMBLEM_VIEW.width);
-  const sway = useSwing(7000, animated);
+  const sway = useSwing(9000, animated);
 
   const opacity = useMemo(
     () =>
       Animated.multiply(
-        power.power.interpolate({ inputRange: [0, 0.72, 1], outputRange: [0, 0, 1] }),
+        power.power.interpolate({ inputRange: [0, 0.25, 1], outputRange: [0, 0.28, 1] }),
         power.shimmer,
       ),
     [power.power, power.shimmer],
   );
-  const scale = power.power.interpolate({ inputRange: [0, 0.72, 1], outputRange: [0.9, 0.9, 1] });
-  const drift = sway.interpolate({ inputRange: [-1, 1], outputRange: [-3, 3] });
-  const breathe = sway.interpolate({ inputRange: [-1, 0, 1], outputRange: [1, 1.012, 1] });
+  const scale = power.reach.interpolate({ inputRange: [0, 1], outputRange: [0.92, 1] });
+  const drift = sway.interpolate({ inputRange: [-1, 1], outputRange: [-4, 4] });
 
   return (
     <Animated.View
@@ -39,7 +38,7 @@ function ProjectionView({ layout, power, animated }: ProjectionProps) {
         width,
         height,
         opacity,
-        transform: [{ translateX: drift }, { rotate: `${layout.angle * 0.3}deg` }, { scale }, { scaleX: breathe }],
+        transform: [{ translateX: drift }, { rotate: `${layout.angle * 0.3}deg` }, { scale }],
       }}
     >
       <SignalEmblem id="projection" width={width} />

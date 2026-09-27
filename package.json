@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "main": "index.ts",
   "dependencies": {
-    "@expo-google-fonts/barlow-condensed": "^0.4.1",
-    "@expo-google-fonts/big-shoulders": "^0.4.1",
+    "@expo-google-fonts/anton": "^0.4.2",
     "@expo-google-fonts/jetbrains-mono": "^0.4.1",
+    "@expo-google-fonts/oswald": "^0.4.2",
+    "@expo-google-fonts/share-tech-mono": "^0.4.1",
     "@react-native-async-storage/async-storage": "2.2.0",
     "expo": "~57.0.25",
     "expo-clipboard": "~57.0.2",

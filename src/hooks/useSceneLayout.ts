@@ -55,7 +55,7 @@ export function computeSceneLayout(width: number, height: number, top: number, b
 
   const roofY = wide ? height * 0.77 : height - bottom - 292;
   const targetY = wide
-    ? Math.max(height * 0.27, projectionHeight * 0.62 + 24)
+    ? Math.max(height * 0.27, projectionHeight * 0.62 + 24, top + 78 + projectionHeight * 0.42)
     : top + 152 + projectionHeight * 0.5;
 
   const pivotX = wide ? width * 0.62 : Math.min(width * 0.3, 190);

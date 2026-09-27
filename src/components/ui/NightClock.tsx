@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import { useNow } from '../../hooks/useNow';
 import { formatHourMinute } from '../../lib/format';
-import { colors, fonts } from '../../theme/tokens';
+import { colors, fonts, radii } from '../../theme/tokens';
 
 interface NightClockProps {
   active: boolean;
@@ -29,13 +29,13 @@ export function NightClock({ active, compact = false }: NightClockProps) {
 
 const styles = StyleSheet.create({
   clock: {
+    height: 42,
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 9,
-    paddingHorizontal: 12,
-    paddingVertical: 7,
-    borderRadius: 999,
-    backgroundColor: 'rgba(3,5,10,0.45)',
+    gap: 10,
+    paddingHorizontal: 14,
+    borderRadius: radii.control,
+    backgroundColor: 'rgba(6,9,14,0.6)',
     borderWidth: 1,
     borderColor: colors.hairline,
   },
@@ -43,30 +43,30 @@ const styles = StyleSheet.create({
     width: 6,
     height: 6,
     borderRadius: 3,
-    backgroundColor: colors.dim,
+    backgroundColor: colors.fog,
   },
   dotLive: {
     backgroundColor: colors.amber,
-    boxShadow: '0 0 10px rgba(255,194,71,0.9)',
+    boxShadow: '0 0 10px rgba(255,197,61,0.9)',
   },
   time: {
-    fontFamily: fonts.monoBold,
-    fontSize: 11,
-    letterSpacing: 1,
+    fontFamily: fonts.mono,
+    fontSize: 13,
+    letterSpacing: 1.4,
     color: colors.text,
     fontVariant: ['tabular-nums'],
   },
   divider: {
     width: 1,
-    height: 10,
-    backgroundColor: colors.hairline,
+    height: 12,
+    backgroundColor: colors.hairlineStrong,
   },
   state: {
     fontFamily: fonts.mono,
-    fontSize: 10,
-    letterSpacing: 1.6,
+    fontSize: 11,
+    letterSpacing: 1.8,
     textTransform: 'uppercase',
-    color: colors.dim,
+    color: colors.muted,
   },
   stateLive: {
     color: colors.amber,
